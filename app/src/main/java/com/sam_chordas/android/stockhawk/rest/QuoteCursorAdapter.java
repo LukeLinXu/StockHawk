@@ -43,6 +43,12 @@ public class QuoteCursorAdapter extends CursorRecyclerViewAdapter<QuoteCursorAda
     return vh;
   }
 
+  public String getSymbol(int position){
+    Cursor cursor = getCursor();
+    cursor.moveToPosition(position);
+    return cursor.getString(cursor.getColumnIndex("symbol"));
+  }
+
   @Override
   public void onBindViewHolder(final ViewHolder viewHolder, final Cursor cursor){
     viewHolder.symbol.setText(cursor.getString(cursor.getColumnIndex("symbol")));
