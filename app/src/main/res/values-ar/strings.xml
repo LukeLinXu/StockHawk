@@ -1,0 +1,9 @@
+<resources>
+  <string name="app_name">ar:Stock Hawk</string>
+  <string name="action_settings">ar:Settings</string>
+  <string name="action_change_units">ar:Change Units</string>
+  <string name="symbol_search">ar:Symbol Search</string>
+  <string name="content_test">ar:Search for a Stock Symbol</string>
+  <string name="network_toast">ar:Uh-oh! This app requires an internet connection</string>
+  <string name="add_stock">ar:Add a stock item</string>
+</resources>
