@@ -102,6 +102,14 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                 @Override public void onInput(MaterialDialog dialog, CharSequence input) {
                   // On FAB click, receive user input. Make sure the stock doesn't already exist
                   // in the DB and proceed accordingly
+                  if(input.toString().contains(" ")){
+                    Toast toast =
+                            Toast.makeText(MyStocksActivity.this, R.string.invalid_input,
+                                    Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, Gravity.CENTER, 0);
+                    toast.show();
+                    return;
+                  }
                   Cursor c = getContentResolver().query(QuoteProvider.Quotes.CONTENT_URI,
                       new String[] { QuoteColumns.SYMBOL }, QuoteColumns.SYMBOL + "= ?",
                       new String[] { input.toString() }, null);

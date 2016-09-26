@@ -42,7 +42,9 @@ public class Utils {
           if (resultsArray != null && resultsArray.length() != 0){
             for (int i = 0; i < resultsArray.length(); i++){
               jsonObject = resultsArray.getJSONObject(i);
-              batchOperations.add(buildBatchOperation(jsonObject));
+              ContentProviderOperation contentProviderOperation = buildBatchOperation(jsonObject);
+              if(contentProviderOperation == null) break;
+              batchOperations.add(contentProviderOperation);
             }
           }
         }
@@ -77,13 +79,11 @@ public class Utils {
 
   public static ContentProviderOperation buildBatchOperation(JSONObject jsonObject){
     try {
-      if(jsonObject.getString("Change").endsWith("null")) return null;
-    } catch (JSONException e) {
-      e.printStackTrace();
-    }
-    ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(
-        QuoteProvider.Quotes.CONTENT_URI);
-    try {
+      if(jsonObject.getString("Change").equals("null") || jsonObject.getString("Bid").equals("null")) return null;
+
+      ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(
+          QuoteProvider.Quotes.CONTENT_URI);
+
       String change = jsonObject.getString("Change");
       builder.withValue(QuoteColumns.SYMBOL, jsonObject.getString("symbol"));
       builder.withValue(QuoteColumns.BIDPRICE, truncateBidPrice(jsonObject.getString("Bid")));
@@ -96,10 +96,10 @@ public class Utils {
       }else{
         builder.withValue(QuoteColumns.ISUP, 1);
       }
-
+      return builder.build();
     } catch (JSONException e){
       e.printStackTrace();
     }
-    return builder.build();
+    return null;
   }
 }
