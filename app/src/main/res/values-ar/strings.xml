@@ -6,4 +6,5 @@
   <string name="content_test">ar:Search for a Stock Symbol</string>
   <string name="network_toast">ar:Uh-oh! This app requires an internet connection</string>
   <string name="add_stock">ar:Add a stock item</string>
+  <string name="already_exist_stock">ar:This stock is already saved!</string>
 </resources>
